@@ -1,0 +1,15 @@
+const app = require('../../app'); // Link to your server file
+const supertest = require('supertest');
+const request = supertest(app);
+
+const mongoose = require('mongoose');
+const { Room } = require('../../models')
+
+const DB_NAME = 'test_thingdex'
+
+beforeAll(async () => {
+  const url = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0-rlera.mongodb.net/${DB_NAME}?retryWrites=true&w=majority`;
+
+  await mongoose.connect(url, { useNewUrlParser: true });
+});
+

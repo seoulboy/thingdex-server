@@ -1,0 +1,84 @@
+const app = require('../../app'); // Link to your server file
+const supertest = require('supertest');
+const request = supertest(app);
+
+const mongoose = require('mongoose');
+const { User } = require('../../models');
+
+const DB_NAME = 'test_Thingdex';
+
+beforeAll(async () => {
+  const url = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0-rlera.mongodb.net/${DB_NAME}?retryWrites=true&w=majority`;
+
+  await mongoose.connect(url, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
+});
+
+afterEach(async () => {
+  await User.deleteMany();
+});
+
+// name: { type: String, required: true },
+// authId: { type: String, required: true, unique: true },
+// email: { type: String, required: true },
+// password: { type: String },
+// photo: { type: String },
+// rooms: { type: [], required: true, default: [] },
+// authStrategy: { type: String, required: true },
+
+/* 
+
+1. save user to database and get user from database
+
+*/
+
+describe('User', () => {
+  xit('Should save user to database', async done => {
+    const newUser = await request.post('/api/users/').send({
+      name: 'Tester1',
+      authId: Math.random().toString(),
+      email: 'test@gmail.com',
+      password: Math.random().toString(),
+      photo: 'https://www.codeproject.com/KB/GDI-plus/ImageProcessing2/img.jpg',
+      authStrategy: 'google',
+    });
+
+    const user = await User.findOne({ email: 'test@gmail.com' });
+    expect(user.name).toBeTruthy();
+    expect(user.authId).toBeTruthy();
+    expect(user.email).toBeTruthy();
+    expect(user.password).toBeTruthy();
+    expect(user.photo).toBeTruthy();
+    expect(user.rooms).toBeTruthy();
+    expect(user.authStrategy).toBeTruthy();
+
+    done();
+  });
+
+  xit('Should get a user from database', async done => {
+    const newUser = await request.post('/api/users/').send({
+      name: 'Tester1',
+      authId: Math.random().toString(),
+      email: 'test@gmail.com',
+      password: Math.random().toString(),
+      photo: 'https://www.codeproject.com/KB/GDI-plus/ImageProcessing2/img.jpg',
+      authStrategy: 'google',
+    });
+
+
+    // { message : not authorized because user can only get user info if authorized and logged into passport}
+    const gotUser = await request.get(`/api/users/${newUser._id}`);
+
+    console.log(gotUser.body);
+    expect(gotUser.name).toBe(newUser.name);
+    expect(gotUser.authId).toBe(newUser.authId);
+    expect(gotUser.password).toBe(newUser.password);
+    expect(gotUser.photo).toBe(newUser.photo);
+    expect(gotUser.rooms).toBe(newUser.rooms);
+    expect(gotUser.authStrategy).toBe(newUser.authStrategy);
+
+    done();
+  });
+});
