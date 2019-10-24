@@ -1,5 +1,7 @@
 // dotenv Config);
-require('dotenv').config();
+if (process.env.NODE_ENV === development) {
+  require('dotenv').config();
+}
 
 const createError = require('http-errors');
 const express = require('express');
