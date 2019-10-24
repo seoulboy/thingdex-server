@@ -1,8 +1,10 @@
 const router = require('express').Router();
 const passport = require('passport');
 const { domain } = require('../../constants/')
-const CLIENT_HOME_PAGE_URL = `http://${domain}:3000`;
+
+const CLIENT_HOME_PAGE_URL = `http://192.168.0.47:3000`;
 const AUTH_FAIL_REDIRECT_URL = '/auth/login/failed';
+
 const {
   registerUser,
   handleLogin,
@@ -12,8 +14,8 @@ const {
 
 // when login is successful, retrieve user info
 router.get('/login/success', (req, res) => {
-  console.log(req.user);
   if (req.user) {
+    console.log(`login successful ${req.user.name}`);
     return res.json({
       authenticated: true,
       message: 'user has successfully authenticated',

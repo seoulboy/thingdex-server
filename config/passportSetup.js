@@ -98,7 +98,7 @@ passport.use(
     {
       clientID: process.env.GITHUB_CLIENT_ID,
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
-      callbackURL: `http://${domain}:4000/auth/github/redirect`,
+      callbackURL: `http://192.168.0.47:4000/auth/github/redirect`,
       scope: ['profile', 'user:email'],
     },
     async (accessToken, refreshToken, profile, done) => {
@@ -114,7 +114,6 @@ passport.use(
           },
           (error, user) => {
             if (error) throw error;
-            console.log('found or created a user: ', user);
             done(null, user);
           }
         );
@@ -133,7 +132,7 @@ passport.use(
     {
       consumerKey: process.env.TWITTER_CLIENT_ID,
       consumerSecret: process.env.TWITTER_CLIENT_SECRET,
-      callbackURL: `http://${domain}:4000/auth/twitter/redirect`,
+      callbackURL: `${domain}/auth/twitter/redirect`,
       includeEmail: true,
     },
     async (accessToken, refreshToken, profile, done) => {

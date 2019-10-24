@@ -17,7 +17,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const app = express();
-const { domain } = require('./constants/index');
+const { domain } = require('./constants');
 
 // Body parser
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -48,12 +48,17 @@ mongoose
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
+  .then(() => {
+    mongoose.connection.readyState == 1
+      ? console.log('connected to mongoDB server')
+      : console.log('failed connection to mongoDB server');
+  }) // connected)})
   .catch(error => console.error(error));
 
 // set up cors to allow us to accept requests from our client
 app.use(
   cors({
-    origin: `http://${domain}:3000`, // allow to server to accept request from different origin
+    origin: `http://192.168.0.47:3000`, // allow to server to accept request from different origin
     methods: 'GET, HEAD, PUT, PATCH, POST, DELETE',
     credentials: true, //allow session cookie from browser to pass throught
   })

@@ -1,15 +1,9 @@
-// var domain =
-//   process.env.NODE_ENV === 'development' ? 'localhost' : '192.168.0.36';
+const localIPAddress = '192.168.0.47';
+const localClientDomain = `http://${localIPAddress}:3000`;
+const cloudClientDomain = `http://www.google.com`;
+const domain =
+  process.env_NODE_ENV === 'development'
+    ? localClientDomain
+    : cloudClientDomain;
 
-
-var domain = '192.168.0.36';
-
-// const publicIp = require('public-ip');
-
-// var domain;
-// const getDomain = async () => {
-//   domain = await publicIp.v4();
-// };
-
-// getDomain();
 module.exports = { domain };

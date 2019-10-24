@@ -27,6 +27,9 @@ jobs:
             - v1-dependencies-
 
       - run: npm install
+          name: Check current node version
+          command:
+            node -v
 
       - save_cache:
           paths:

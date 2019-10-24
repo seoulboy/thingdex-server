@@ -32,7 +32,6 @@ const handleGetAllRooms = async (req, res, next) => {
     const { user_id: userId } = req.params;
     if (mongoose.Types.ObjectId.isValid(userId)) {
       const rooms = await Room.find({ userId });
-
       res.status(200).json(rooms);
     } else {
       res.status(400).json({

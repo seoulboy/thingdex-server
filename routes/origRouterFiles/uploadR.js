@@ -3,7 +3,7 @@ const router = express.Router();
 const upload = require('../../services/file-upload');
 
 const { domain } = require('../../constants');
-const CLIENT_HOME_PAGE_URL = `http://${domain}:3000`;
+const CLIENT_HOME_PAGE_URL = `${domain}`;
 
 const aws = require('aws-sdk');
 
