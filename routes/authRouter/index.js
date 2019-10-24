@@ -2,7 +2,7 @@ const router = require('express').Router();
 const passport = require('passport');
 const { domain } = require('../../constants/')
 
-const CLIENT_HOME_PAGE_URL = `http://192.168.0.47:3000`;
+const CLIENT_HOME_PAGE_URL = `${domain}`;
 const AUTH_FAIL_REDIRECT_URL = '/auth/login/failed';
 
 const {

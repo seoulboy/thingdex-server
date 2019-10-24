@@ -27,7 +27,7 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: '/auth/google/redirect',
+      callbackURL: '${domain}/auth/google/redirect',
     },
     async (accessToken, refreshToken, profile, done) => {
       console.log('google auth passport callback function fired');
@@ -62,7 +62,7 @@ passport.use(
     {
       clientID: process.env.FACEBOOK_CLIENT_ID,
       clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
-      callbackURL: '/auth/facebook/redirect',
+      callbackURL: '${domain}/auth/facebook/redirect',
       profileFields: ['id', 'displayName', 'photos', 'emails'],
     },
     async (accessToken, refreshToken, profile, done) => {
@@ -98,7 +98,7 @@ passport.use(
     {
       clientID: process.env.GITHUB_CLIENT_ID,
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
-      callbackURL: `http://192.168.0.47:4000/auth/github/redirect`,
+      callbackURL: `${domain}/auth/github/redirect`,
       scope: ['profile', 'user:email'],
     },
     async (accessToken, refreshToken, profile, done) => {
