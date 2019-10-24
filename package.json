@@ -7,9 +7,6 @@
     "test": "jest",
     "test:watch": "jest --watch"
   },
-  "jest": {
-    "testEnvironment": "node"
-  },
   "dependencies": {
     "aws-sdk": "^2.550.0",
     "bcryptjs": "^2.4.3",
