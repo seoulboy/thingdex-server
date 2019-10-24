@@ -1,6 +1,3 @@
-const { domain } = require('../constants')
-
-
 const passport = require('passport');
 
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
@@ -11,6 +8,9 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
 const bcrypt = require('bcryptjs');
 const { User } = require('../models');
+const { domain } = require('../constants');
+
+const CLIENT_HOME_PAGE_URL = domain;
 
 passport.serializeUser((user, done) => {
   done(null, user.id);
@@ -27,7 +27,7 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: '${domain}/auth/google/redirect',
+      callbackURL: `${CLIENT_HOME_PAGE_URL}/auth/google/redirect`,
     },
     async (accessToken, refreshToken, profile, done) => {
       console.log('google auth passport callback function fired');
@@ -62,7 +62,7 @@ passport.use(
     {
       clientID: process.env.FACEBOOK_CLIENT_ID,
       clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
-      callbackURL: '${domain}/auth/facebook/redirect',
+      callbackURL: `${CLIENT_HOME_PAGE_URL}/auth/facebook/redirect`,
       profileFields: ['id', 'displayName', 'photos', 'emails'],
     },
     async (accessToken, refreshToken, profile, done) => {
@@ -98,7 +98,7 @@ passport.use(
     {
       clientID: process.env.GITHUB_CLIENT_ID,
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
-      callbackURL: `${domain}/auth/github/redirect`,
+      callbackURL: `${CLIENT_HOME_PAGE_URL}/auth/github/redirect`,
       scope: ['profile', 'user:email'],
     },
     async (accessToken, refreshToken, profile, done) => {
@@ -132,11 +132,11 @@ passport.use(
     {
       consumerKey: process.env.TWITTER_CLIENT_ID,
       consumerSecret: process.env.TWITTER_CLIENT_SECRET,
-      callbackURL: `${domain}/auth/twitter/redirect`,
+      callbackURL: `${CLIENT_HOME_PAGE_URL}/auth/twitter/redirect`,
       includeEmail: true,
     },
     async (accessToken, refreshToken, profile, done) => {
-      console.log('twitter auth passport callback fired'); 
+      console.log('twitter auth passport callback fired');
       try {
         User.findOrCreate(
           { authId: profile._json.id },
