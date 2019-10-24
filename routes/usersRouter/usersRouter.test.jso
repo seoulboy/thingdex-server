@@ -20,14 +20,6 @@ afterEach(async () => {
   await User.deleteMany();
 });
 
-// name: { type: String, required: true },
-// authId: { type: String, required: true, unique: true },
-// email: { type: String, required: true },
-// password: { type: String },
-// photo: { type: String },
-// rooms: { type: [], required: true, default: [] },
-// authStrategy: { type: String, required: true },
-
 /* 
 
 1. save user to database and get user from database

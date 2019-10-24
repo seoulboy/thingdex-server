@@ -8,7 +8,7 @@ const {
   handleGetAllRooms,
   handlePostRoom,
   handleDeleteRoom,
-} = require('../../controllers');
+} = require('../../controllers/roomController');
 
 router.use('/:room_id/locations', locationsRouter);
 
