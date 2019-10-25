@@ -8,9 +8,7 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
 const bcrypt = require('bcryptjs');
 const { User } = require('../models');
-const { domain } = require('../constants');
-
-const serverDomain = 'https://api.thingdex.space';
+const { domain, serverDomain } = require('../constants');
 
 passport.serializeUser((user, done) => {
   done(null, user.id);
