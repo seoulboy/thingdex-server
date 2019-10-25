@@ -10,7 +10,7 @@ const bcrypt = require('bcryptjs');
 const { User } = require('../models');
 const { domain } = require('../constants');
 
-const CLIENT_HOME_PAGE_URL = domain;
+const serverDomain = 'https://api.thingdex.space';
 
 passport.serializeUser((user, done) => {
   done(null, user.id);
@@ -27,7 +27,7 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: `${CLIENT_HOME_PAGE_URL}/auth/google/redirect`,
+      callbackURL: `${serverDomain}/auth/google/redirect`,
     },
     async (accessToken, refreshToken, profile, done) => {
       console.log('google auth passport callback function fired');
@@ -62,7 +62,7 @@ passport.use(
     {
       clientID: process.env.FACEBOOK_CLIENT_ID,
       clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
-      callbackURL: `${CLIENT_HOME_PAGE_URL}/auth/facebook/redirect`,
+      callbackURL: `${serverDomain}/auth/facebook/redirect`,
       profileFields: ['id', 'displayName', 'photos', 'emails'],
     },
     async (accessToken, refreshToken, profile, done) => {
@@ -98,7 +98,7 @@ passport.use(
     {
       clientID: process.env.GITHUB_CLIENT_ID,
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
-      callbackURL: `${CLIENT_HOME_PAGE_URL}/auth/github/redirect`,
+      callbackURL: `${serverDomain}/auth/github/redirect`,
       scope: ['profile', 'user:email'],
     },
     async (accessToken, refreshToken, profile, done) => {
@@ -132,7 +132,7 @@ passport.use(
     {
       consumerKey: process.env.TWITTER_CLIENT_ID,
       consumerSecret: process.env.TWITTER_CLIENT_SECRET,
-      callbackURL: `${CLIENT_HOME_PAGE_URL}/auth/twitter/redirect`,
+      callbackURL: `${serverDomain}/auth/twitter/redirect`,
       includeEmail: true,
     },
     async (accessToken, refreshToken, profile, done) => {
