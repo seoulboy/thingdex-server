@@ -58,7 +58,7 @@ mongoose
 // set up cors to allow us to accept requests from our client
 app.use(
   cors({
-    origin: 'https://thingdex.space', // allow to server to accept request from different origin
+    origin: `${domain}`, // allow to server to accept request from different origin
     methods: 'GET, HEAD, PUT, PATCH, POST, DELETE',
     credentials: true, //allow session cookie from browser to pass throught
   })
