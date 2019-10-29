@@ -9,8 +9,9 @@ const handleSearchItem = async (req, res, next) => {
 
   try {
     if (mongoose.Types.ObjectId.isValid(userId)) {
+      console.log('valid user id', userId)
       const locations = await Location.find({ userId });
-
+      console.log('locations', locations)
       const found = locations.filter(location => {
         for (let i = 0; i < location.items.length; i++) {
           if (

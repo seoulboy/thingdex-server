@@ -15,7 +15,6 @@ const {
 // when login is successful, retrieve user info
 router.get('/login/success', (req, res) => {
   if (req.user) {
-    console.log(`login successful ${req.user.name}`);
     return res.json({
       authenticated: true,
       message: 'user has successfully authenticated',
