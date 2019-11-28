@@ -59,7 +59,6 @@ const handleDeleteItem = async (req, res, next) => {
 };
 
 const handleGetItem = async (req, res, next) => {
-  console.log(req.params);
   try {
     const { item_id: itemId } = req.params;
 
@@ -122,22 +121,20 @@ const handlePostItem = async (req, res, next) => {
       mongoose.Types.ObjectId.isValid(userId)
     ) {
       if (item && location && imageId && imageUrl) {
-        console.log(req.body);
-        res.send('hi');
-        // const newItem = await new Item({
-        //   name,
-        //   location,
-        //   imageId,
-        //   imageUrl,
-        //   userId,
-        //   roomId,
-        // }).save();
+        const newItem = await new Item({
+          name,
+          location,
+          imageId,
+          imageUrl,
+          userId,
+          roomId,
+        }).save();
 
-        // const room = await Room.findById(roomId);
-        // room.items = room.items.concat(newItem.id);
-        // room.save();
+        const room = await Room.findById(roomId);
+        room.items = room.items.concat(newItem.id);
+        room.save();
 
-        // res.status(200).json(newItem);
+        res.status(200).json(newItem);
       }
     } else {
       res.status(400).json({
