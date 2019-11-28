@@ -1,7 +1,6 @@
-if (process.env.NODE_ENV === 'development') {
+if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
 }
-
 
 const createError = require('http-errors');
 const express = require('express');
@@ -10,7 +9,6 @@ const passport = require('passport');
 // router
 const indexRouter = require('./routes/index'),
   usersRouter = require('./routes/usersRouter'),
-  roomsRouter = require('./routes/roomsRouter'),
   authRouter = require('./routes/authRouter');
 const passportSetup = require('./config/passportSetup');
 const mongoose = require('mongoose');

@@ -23,10 +23,10 @@ var server = http.createServer(app);
 
 console.log(
   process.env.NODE_ENV === 'development'
-    ? `server running on port ${port}!`
+    ? `server running on ${require('../constants/index').serverDomain}!`
     : require('../constants/').serverDomain
 );
-console.log(`running on NODE_ENV: ${process.env.NODE_ENV}`);
+console.log(`running on environment variable: ${process.env.NODE_ENV}`);
 
 /**
  * Listen on provided port, on all network interfaces.
