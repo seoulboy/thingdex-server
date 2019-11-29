@@ -52,7 +52,7 @@ npm install
 npm start
 ```
 
-thingdex-server의 root 폴더 안에 '.dotenv' 파일명으로 작성한 파일 안에 아래의 ** **안 작성
+thingdex-server의 root 디렉토리 안에 '.dotenv' 파일명으로 작성한 파일 안에 아래의 ** **안 작성
 
 ```
 DB_USER=**MongoDB userID**
