@@ -1,4 +1,4 @@
-const localIPAddress = '192.168.0.57';
+const localIPAddress = '192.168.0.54';
 const localClientDomain = `http://${localIPAddress}:3000`;
 const cloudClientDomain = `https://www.thingdex.space`;
 
